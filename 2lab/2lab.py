@@ -20,7 +20,7 @@ plt.legend()
 plt.title('Диаграмма рассеяния для y = 5 * log(x1) * x2^2')
 plt.show()
 
-#График для y = c2 (константа)
+# График для y = c2 (константа)
 plt.figure(figsize=(10, 6))
 plt.scatter(df['x2'], df['y'], label='y = 5 * log(x1) * x2^2')
 plt.xlabel('x2')
