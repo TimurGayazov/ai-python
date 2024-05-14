@@ -76,8 +76,8 @@ def true_fun(X):
 
 
 np.random.seed(0)
-n_samples = 30
-degrees = range(1, 10)
+n_samples = 20
+degrees = range(1, 9)
 X = np.sort(np.random.rand(n_samples))
 y = true_fun(X) + np.random.rand(n_samples) * 0.1
 
@@ -90,10 +90,9 @@ for i, degree in enumerate(degrees, 1):
         ("polynomial_features", polynomial_features),
         ("linear_regression", linear_regression),
     ])
-    scores = cross_val_score(pipeline, X[:, np.newaxis], y, scoring="neg_mean_squared_error", cv=10)
+    scores = cross_val_score(pipeline, X[:, np.newaxis], y, scoring="neg_mean_squared_error", cv=20)
     pipeline.fit(X[:, np.newaxis], y)
     y_pred = pipeline.predict(X[:, np.newaxis])
-
     # Графики зависимости точности на обучающей и тестовой выборках от степени полиномиальной функции
     plt.subplot(3, 3, i)
     plt.plot(X, y_pred, label="Model")
@@ -104,7 +103,7 @@ for i, degree in enumerate(degrees, 1):
     plt.xlim((0, 1))
     plt.ylim((-2, 2))
     plt.legend(loc="best")
-    plt.title(f"Degree {degree}\nMSE = {-scores.mean():.2e} (+/- {scores.std():.2e})")
+    plt.title(f"Degree {degree}\n r2 = {-r2_score(y_pred, scores)} \n MSE = {-scores.mean():.2e}  (+/- {scores.std():.2e})")
 plt.show()
 
 # Построение графика зависимости точности на обучающей и тестовой выборках от коэффициента регуляризации
